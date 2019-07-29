@@ -25,6 +25,7 @@ call plug#begin('$VIM/vimfiles/plugged') "windows
     " 移动光标到插件名上, 使用'#'快速跳转到每个插件的配置处
 
     " 倒序
+    Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
     " 光标下单词显示下划线
     Plug 'itchyny/vim-cursorword'
     " Plug 'liuchengxu/space-vim-dark'
@@ -135,8 +136,8 @@ call plug#begin('$VIM/vimfiles/plugged') "windows
     " view
     " airline
     " 状态栏增强展示
-    Plug 'vim-airline/vim-airline', { 'for':['python', 'ruby', 'html', 'javascript', 'css'] }
-    Plug 'vim-airline/vim-airline-themes', { 'for':['python', 'ruby', 'html', 'javascript', 'css'] }
+    Plug 'vim-airline/vim-airline' ", { 'for':['python', 'ruby', 'c', 'cpp', 'html', 'javascript', 'css'] }
+    Plug 'vim-airline/vim-airline-themes' ", { 'for':['python', 'ruby', 'c', 'cpp', 'html', 'javascript', 'css'] }
     " rainbow_parentheses
     " 括号显示增强
     Plug 'kien/rainbow_parentheses.vim'
@@ -761,13 +762,12 @@ filetype plugin indent on
 " fugitive {{{
     " :Gdiff  :Gstatus :Gvsplit
     nnoremap <leader>ge :Gdiff<CR>
-    " not ready to open
-    " <leader>gb maps to :Gblame<CR>
-    " <leader>gs maps to :Gstatus<CR>
-    " <leader>gd maps to :Gdiff<CR>  和现有冲突
-    " <leader>gl maps to :Glog<CR>
-    " <leader>gc maps to :Gcommit<CR>
-    " <leader>gp maps to :Git push<CR>
+    nnoremap <leader>gb :Gblame<CR>
+    nnoremap <leader>gs :Gstatus<CR>
+    " nnoremap <leader>gd :Gdiff<CR>  和现有冲突
+    " nnoremap <leader>gl :Glog<CR>
+    " nnoremap <leader>gc :Gcommit<CR>
+    " nnoremap <leader>gp :Git push<CR>
 " }}}
 
 " gitgutter {{{
@@ -777,7 +777,9 @@ filetype plugin indent on
     let g:gitgutter_enabled = 0
     let g:gitgutter_highlight_lines = 1
     let g:gitgutter_max_signs = 500
-    nnoremap <leader>gs :GitGutterToggle<CR>
+    nnoremap <leader>gg :GitGutterToggle<CR>
+    nmap ]c <Plug>GitGutterNextHunk
+    nmap [c <Plug>GitGutterPrevHunk
 " }}}
 
 " gundo {{{
@@ -1008,8 +1010,8 @@ filetype plugin indent on
     " 代码缩进线标志线
     let g:indentLine_char = '¦'
     let g:indentLine_color_term = 239
-    "映射到ctrl+i键 
-    map <C-i> :IndentLinesToggle<CR> 
+    "映射到,i键 
+    map <leader>i :IndentLinesToggle<CR> 
 "}}}
 
 
@@ -1048,6 +1050,23 @@ filetype plugin indent on
     " map z/ <Plug>(incsearch-fuzzyspell-/)
     " map z? <Plug>(incsearch-fuzzyspell-?)
     " map zg/ <Plug>(incsearch-fuzzyspell-stay)
+" }}}
+
+" vim-session {{{
+    " If you don't want help windows to be restored:
+    set sessionoptions-=help
+    " Don't save hidden and unloaded buffers in sessions.
+    " set sessionoptions-=buffers
+    " Don't persist options and mappings because it can corrupt sessions.
+    " set sessionoptions-=options
+    let g:session_default_overwrite = 1
+    let g:session_autoload = 'no' " prompt | yes | no
+    let g:session_autosave = 'no'
+
+    nmap <leader>s :SaveSession 
+    nmap <leader>ss :SaveSession!<CR>
+    nmap <leader>l :OpenSession 
+
 " }}}
 
 " ################### 语言相关 ###################
