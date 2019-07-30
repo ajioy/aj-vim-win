@@ -231,8 +231,8 @@ call plug#begin('$VIM/vimfiles/plugged') "windows
                 let g:table_mode_corner = '|'
                 " Use this option to define the delimiter which used by
                 let g:table_mode_delimiter = ' '
-                let g:table_mode_corner_corner='+'
-                let g:table_mode_header_fillchar='='
+                " let g:table_mode_corner_corner='+'
+                " let g:table_mode_header_fillchar='='
             " }}}
             " shortcut mapping {{{
                 " <++> is a placeholder
