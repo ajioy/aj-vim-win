@@ -379,15 +379,17 @@ filetype plugin indent on
 " }}}
 
 "  asyncrun.vim {{{
-    " 自动打开 quickfix window ，高度为 6
-    let g:asyncrun_open = 6
+    " 自动打开 quickfix window ，高度为10
+    let g:asyncrun_open = 10
 
     " 任务结束时候响铃提醒
     let g:asyncrun_bell = 1
 
     " 设置 F10 打开/关闭 Quickfix 窗口
     nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
-    nnoremap <silent> <leader>r :w<cr>:AsyncRun -raw python %<cr>
+    " nnoremap <silent> <leader>r :w<cr>:AsyncRun -raw python %<cr>
+    " 用python3多一些
+    noremap <silent> <leader>r :w<cr>:AsyncRun -raw python3 %<cr>
     " nnoremap <silent> <leader>a :AsyncRun 
     " nnoremap <silent> <leader>c :AsyncRun! 
     nnoremap <leader>a :AsyncRun 
