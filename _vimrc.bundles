@@ -236,7 +236,7 @@ call plug#begin('$VIM/vimfiles/plugged') "windows
             " }}}
             " shortcut mapping {{{
                 " <++> is a placeholder
-                autocmd Filetype markdown map <leader>w yiWi[<esc>Ea](<esc>pa)
+                " autocmd Filetype markdown map <leader>w yiWi[<esc>Ea](<esc>pa)
                 autocmd Filetype markdown inoremap ,f <Esc>/<++><CR>:nohlsearch<CR>c4l
                 autocmd Filetype markdown inoremap ,n ---<Enter><Enter>
                 autocmd Filetype markdown inoremap ,b **** <++><Esc>F*hi
@@ -393,7 +393,10 @@ filetype plugin indent on
     " nnoremap <silent> <leader>a :AsyncRun 
     " nnoremap <silent> <leader>c :AsyncRun! 
     nnoremap <leader>a :AsyncRun 
-    nnoremap <leader>c :AsyncRun! 
+    " 有感叹号可以避免Quickfix自动滚动
+    nnoremap <leader>af :AsyncRun! 
+    " stop the running job
+    nnoremap <leader>as :AsyncStop! 
     let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '_darcs', 'build.xml'] 
 " }}}
 
@@ -747,7 +750,7 @@ filetype plugin indent on
     nmap     <leader>] <Plug>CtrlSFCwordPath<CR>
     nmap     <leader>[ <Plug>CtrlSFPwordPath
     nnoremap <leader>o :CtrlSFOpen<CR>
-    nnoremap <leader>t :CtrlSFToggle<CR>
+    nnoremap <leader>to :CtrlSFToggle<CR>
     inoremap <leader>t <Esc>:CtrlSFToggle<CR>
     " let g:ctrlsf_extra_root_markers = ['.root']
     let g:ctrlsf_default_root = 'project' " search in whole project, not current path

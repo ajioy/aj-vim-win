@@ -546,6 +546,8 @@ noremap <silent><BackSpace> :nohls<CR>
 
 " " kj 替换 Esc
 " inoremap kj <Esc>
+" 插入模式下将前面输的单词变为大写
+" inoremap <C-u> <esc>gUiwea
 " 插入模式向前删除一个字符
 inoremap <C-d> <Del>
 
