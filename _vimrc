@@ -739,6 +739,7 @@ set listchars=tab:>/,trail:•,extends:#,nbsp:. " Highlight problematic whitespa
 " endfunc
 
 " nmap <leader>i a // Ajioy <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
+iab xtime <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
 
 " 打开文件时恢复光标位置
 autocmd BufReadPost *

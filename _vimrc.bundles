@@ -252,6 +252,18 @@ call plug#begin('$VIM/vimfiles/plugged') "windows
                 autocmd Filetype markdown inoremap ,3 ###<Space><Enter><++><Esc>kA
                 autocmd Filetype markdown inoremap ,4 ####<Space><Enter><++><Esc>kA
                 autocmd Filetype markdown inoremap ,l --------<Enter>
+
+                " auto modifed update date
+                " autocmd BufWrite,BufWritePre,FileWritePre *.md ks|call LastModified()|'s
+                " func LastModified()
+                    " if line("$") > 20
+                        " let l = 20
+                    " else
+                        " let l = line("$")
+                    " endif
+                    " exe "1,".l."g/updated: /s/updated: .*/updated:".
+                                " \strftime(" %F %H:%M:%S" ) . "/e"
+                " endfunc
             " }}}
         endif
 
