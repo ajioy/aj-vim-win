@@ -70,7 +70,7 @@ call plug#begin('$VIM/vimfiles/plugged') "windows
     Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
     " trailingwhitespace
     " 快速去行尾空格 [, + <Space>]
-    " Plug 'bronson/vim-trailing-whitespace'
+    Plug 'bronson/vim-trailing-whitespace'
     " 快速赋值语句对齐
     Plug 'junegunn/vim-easy-align'
 
@@ -810,6 +810,7 @@ filetype plugin indent on
     set laststatus=2
     " set lazyredraw
     " let g:airline_theme='powerlineish'
+    let g:airline_theme='jellybeans'
     " 使用powerline打过补丁的字体
     let g:airline_powerline_fonts=1
     if !exists('g:airline_symbols')

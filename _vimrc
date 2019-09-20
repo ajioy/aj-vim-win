@@ -210,8 +210,8 @@ set guicursor+=a:blinkon0
     " silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
 " endfunction
 
-winpos 1400 0 "设置初始界面位置  
-set lines=55 columns=95 "设置初始界面大小
+winpos 0 0 "设置初始界面位置  
+set lines=50 columns=95 "设置初始界面大小
 
 " 恢复上次窗口位置和大小，缺点是会闪一下
 " if has("gui_running")
