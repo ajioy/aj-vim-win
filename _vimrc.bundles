@@ -143,7 +143,7 @@ call plug#begin('$VIM/vimfiles/plugged') "windows
     Plug 'kien/rainbow_parentheses.vim'
     " 主题 solarized
     " solarized
-    " Plug 'altercation/vim-colors-solarized'
+    Plug 'altercation/vim-colors-solarized'
     " molokai
     " 主题 molokai
     " Plug 'tomasr/molokai'
@@ -810,7 +810,9 @@ filetype plugin indent on
     set laststatus=2
     " set lazyredraw
     " let g:airline_theme='powerlineish'
-    let g:airline_theme='jellybeans'
+    " let g:airline_theme='jellybeans'
+    let g:airline_theme='luna'
+
     " 使用powerline打过补丁的字体
     let g:airline_powerline_fonts=1
     if !exists('g:airline_symbols')
@@ -886,14 +888,14 @@ filetype plugin indent on
 
 " ################### 显示增强-主题 ###################"
 
-" " solarized {{{
-    " set background=dark
-    " colorscheme solarized
-    " let g:solarized_termcolors=256
-    " let g:solarized_termtrans=1
-    " let g:solarized_contrast="high"
-    " let g:solarized_visibility="high"
-" " }}}
+" solarized {{{
+    set background=dark
+    colorscheme solarized
+    let g:solarized_termcolors=256
+    let g:solarized_termtrans=1
+    let g:solarized_contrast="high"
+    let g:solarized_visibility="high"
+" }}}
 
 " " molokai {{{
     " " monokai原始背景色
@@ -927,7 +929,7 @@ filetype plugin indent on
     " colorscheme onedark
 " " }}}
 " gotham {{{
-    colorscheme gotham256
+    " colorscheme gotham256
 " }}}
 " " space-vim-dark {{{
     " colorscheme space-vim-dark
