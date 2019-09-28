@@ -44,19 +44,19 @@ call plug#begin('$VIM/vimfiles/plugged') "windows
     " ========================
 
     " 语法检查
-    " Plug 'w0rp/ale', { 'for':['python', 'ruby', 'html', 'javascript', 'css'] }
+    Plug 'w0rp/ale', { 'for':['python', 'ruby', 'html', 'javascript', 'css'] }
 
     " Group dependencies, vim-snippets depends on ultisnips
     " 代码片段快速插入 (snippets中,是代码片段资源,需要学习)
     " Snippets are separated from the engine. Add this if you want them:
-    " Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+    Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
     " auto complete
     " 代码自动补全
     " 迄今为止用到的最好的自动VIM自动补全插件
     " 重启 :YcmRestartServer
-    Plug 'Valloric/YouCompleteMe', { 'on':  'YCM' } " 单独启动非常慢
-    " Plug 'Valloric/YouCompleteMe', {'for':['python', 'html', 'javascript', 'css', 'c', 'cpp', 'cc']}
+    " Plug 'Valloric/YouCompleteMe'     ", { 'on':  'YCM' } " 单独启动非常慢
+    Plug 'Valloric/YouCompleteMe', {'for':['python', 'html', 'javascript', 'css', 'c', 'cpp', 'cc']}
 
     " 自动补全单引号，双引号等
     " Plug 'Raimondi/delimitMate'
@@ -440,49 +440,57 @@ filetype plugin indent on
     " let g:pymode_syntax_space_errors = g:pymode_syntax_all
 " " }}}
 
-   " " ale {{{
-     " if has_key(g:plugs, 'ale')
-     " " pip install flake8
-     " " npm install -g eslint eslint-plugin-standard eslint-plugin-promise eslint-config-standard
-     " " npm install -g eslint-plugin-import eslint-plugin-node eslint-plugin-html babel-eslint
-     " let g:ale_linters = {
-     " \   'python': ['flake8'],
-     " \   'javascript': ['eslint'],
-     " \}
+   " ale {{{
+     if has_key(g:plugs, 'ale')
+     "使用clang对c和c++进行语法检查，对python使用pylint进行语法检查
+     " pip install flake8
+     " npm install -g eslint eslint-plugin-standard eslint-plugin-promise eslint-config-standard
+     " npm install -g eslint-plugin-import eslint-plugin-node eslint-plugin-html babel-eslint
+     let g:ale_linters = {
+     \   'python': ['flake8'],
+     \   'javascript': ['eslint'],
+     \   'c++': ['clang'],
+     \   'c': ['clang'],
+     \}
+     " E501 -> 120 chars
+     let g:ale_python_flake8_args="--ignore=E114,E116,E131 --max-line-length=120"
+     " --ignore=E225,E124,E712,E116
 
-     " " E501 -> 120 chars
-     " let g:ale_python_flake8_args="--ignore=E114,E116,E131 --max-line-length=120"
-     " " --ignore=E225,E124,E712,E116
+     let g:ale_sign_error = 'x'
+     let g:ale_sign_warning = '>'
 
-     " let g:ale_sign_error = '>>'
-     " let g:ale_sign_warning = '>'
+     let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+     let g:ale_echo_msg_error_str = 'E'
+     let g:ale_echo_msg_warning_str = 'W'
+     let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
-     " let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
-     " let g:ale_echo_msg_error_str = 'E'
-     " let g:ale_echo_msg_warning_str = 'W'
-     " let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+     " 文件内容发生变化时不进行检查，只在保存时才检查语法
+     " let g:ale_lint_on_text_changed='never'
+     " 打开文件时不进行检查
+     " let g:ale_lint_on_enter=0
 
-     " nmap <silent> <Leader>ep <Plug>(ale_previous_wrap)
-     " nmap <silent> <Leader>en <Plug>(ale_next_wrap)
+     nmap <silent> <Leader>ep <Plug>(ale_previous_wrap)
+     nmap <silent> <Leader>en <Plug>(ale_next_wrap)
 
-     " nnoremap <silent> <Leader>ec :ALEToggle<CR>
+     nnoremap <silent> <Leader>ec :ALEToggle<CR>
 
-     " " troggle quickfix list
-     " function! ToggleErrors()
-         " let old_last_winnr = winnr('$')
-         " lclose
-         " if old_last_winnr == winnr('$')
-             " " Nothing was closed, open syntastic_error location panel
-             " lopen
-         " endif
-     " endfunction
-     " nnoremap <Leader>s :call ToggleErrors()<cr>
+     " troggle quickfix list
+     function! ToggleErrors()
+         let old_last_winnr = winnr('$')
+         lclose
+         if old_last_winnr == winnr('$')
+             " Nothing was closed, open syntastic_error location panel
+             lopen
+         endif
+     endfunction
+     nnoremap <Leader>s :call ToggleErrors()<cr>
 
-     " let g:ale_set_highlights = 1
-     " highlight clear ALEErrorSign
-     " highlight clear ALEWarningSign
-     " endif
-  " " }}}
+     let g:ale_set_highlights = 1
+     highlight clear ALEErrorSign
+     highlight clear ALEWarningSign
+
+     endif
+  " }}}
 
 " ################### 自动补全 ###################
 "  非YCM系列补全插件
@@ -497,84 +505,84 @@ filetype plugin indent on
     " let g:python_host_prog = "E:/Python/Python27"
     " let g:python3_host_prog = "E:/Python/Python35"
 
-" " YouCompleteMe {{{
-    " " set runtimepath+=D:/Vim/vimfiles/plugged/YouCompleteMe " 加这句会让按需加载失效
-    " " let g:ycm_server_python_interpreter = 'D:/Python/Python27/python.exe'
-    " let g:ycm_python_binary_path = 'python' "这种也行，但要保证环境变量中只有
-    " " 一个路径
-    " "youcompleteme  默认tab  s-tab 和自动补全冲突
-    " let g:ycm_key_list_select_completion=['<c-n>']
-    " let g:ycm_key_list_previous_completion=['<c-p>']
-    " " let g:ycm_key_list_select_completion = ['<Down>']
-    " " let g:ycm_key_list_previous_completion = ['<Up>']
-    " let g:ycm_confirm_extra_conf=0
-    " let g:ycm_complete_in_comments = 1  "在注释输入中也能补全
-    " let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
-    " let g:ycm_use_ultisnips_completer = 1 "提示UltiSnips
-    " let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
-    " let g:ycm_collect_identifiers_from_tags_files = 1
-    " " 开启语法关键字补全
-    " let g:ycm_seed_identifiers_with_syntax=1
-    " " 回车作为选中
-    " let g:ycm_key_list_stop_completion = ['<CR>']
+" YouCompleteMe {{{
+    " set runtimepath+=D:/Vim/vimfiles/plugged/YouCompleteMe " 加这句会让按需加载失效
+    " let g:ycm_server_python_interpreter = 'D:/Python/Python27/python.exe'
+    let g:ycm_python_binary_path = 'python' "这种也行，但要保证环境变量中只有
+    " 一个路径
+    "youcompleteme  默认tab  s-tab 和自动补全冲突
+    let g:ycm_key_list_select_completion=['<c-n>']
+    let g:ycm_key_list_previous_completion=['<c-p>']
+    " let g:ycm_key_list_select_completion = ['<Down>']
+    " let g:ycm_key_list_previous_completion = ['<Up>']
+    let g:ycm_confirm_extra_conf=0
+    let g:ycm_complete_in_comments = 1  "在注释输入中也能补全
+    let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
+    let g:ycm_use_ultisnips_completer = 1 "提示UltiSnips
+    let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
+    let g:ycm_collect_identifiers_from_tags_files = 1
+    " 开启语法关键字补全
+    let g:ycm_seed_identifiers_with_syntax=1
+    " 回车作为选中
+    let g:ycm_key_list_stop_completion = ['<CR>']
 
-    " "let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
-    " let g:ycm_extra_spacing = 0
+    "let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
+    let g:ycm_extra_spacing = 0
 
-    " " 跳转到定义处, 分屏打开
-    " let g:ycm_goto_buffer_command = 'horizontal-split'
-    " let g:ycm_register_as_syntastic_checker = 0
-    " " nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
-    " nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-    " nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
+    " 跳转到定义处, 分屏打开
+    let g:ycm_goto_buffer_command = 'horizontal-split'
+    let g:ycm_register_as_syntastic_checker = 0
+    " nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
+    nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+    nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
 
-    " " 引入，可以补全系统，以及python的第三方包 
-    " if !empty(glob("$VIM/vimfiles/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"))
-        " let g:ycm_global_ycm_extra_conf = "$VIM/vimfiles/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
-    " endif
+    " 引入，可以补全系统，以及python的第三方包 
+    if !empty(glob("$VIM/vimfiles/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"))
+        let g:ycm_global_ycm_extra_conf = "$VIM/vimfiles/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+    endif
 
-    " " set completeopt=menu,menuone
+    " set completeopt=menu,menuone
 
-    " " 直接触发自动补全 insert模式下
-    " " let g:ycm_key_invoke_completion = '<C-Space>'
-    " " 黑名单,不启用
-    " let g:ycm_filetype_blacklist = {
-        " \ 'tagbar' : 1,
-        " \ 'gitcommit' : 1,
-        " \}
+    " 直接触发自动补全 insert模式下
+    " let g:ycm_key_invoke_completion = '<C-Space>'
+    " 黑名单,不启用
+    let g:ycm_filetype_blacklist = {
+        \ 'tagbar' : 1,
+        \ 'gitcommit' : 1,
+        \}
 
-    " " }}}
+    " }}}
 
-" " ultisnips {{{
-    " let g:UltiSnipsExpandTrigger       = "<tab>"
-    " let g:UltiSnipsJumpForwardTrigger  = "<tab>"
-    " let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-    " let g:UltiSnipsSnippetDirectories  = ['UltiSnips']
-    " let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
-    " " 定义存放代码片段的文件夹 .vim/UltiSnips下，使用自定义和默认的，将会的到全局，有冲突的会提示
-    " " 进入对应filetype的snippets进行编辑
-    " map <leader>us :UltiSnipsEdit<CR>
+" ultisnips {{{
+    let g:UltiSnipsExpandTrigger       = "<tab>"
+    let g:UltiSnipsJumpForwardTrigger  = "<tab>"
+    let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+    let g:UltiSnipsSnippetDirectories  = ['UltiSnips']
+    let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
+    " 定义存放代码片段的文件夹 .vim/UltiSnips下，使用自定义和默认的，将会的到全局，有冲突的会提示
+    " 进入对应filetype的snippets进行编辑
+    map <leader>us :UltiSnipsEdit<CR>
 
-    " " ctrl+j/k 进行选择
-    " func! g:JInYCM()
-        " if pumvisible()
-            " return "\<C-n>"
-        " else
-            " return "\<c-j>"
-        " endif
-    " endfunction
+    " ctrl+j/k 进行选择
+    func! g:JInYCM()
+        if pumvisible()
+            return "\<C-n>"
+        else
+            return "\<c-j>"
+        endif
+    endfunction
 
-    " func! g:KInYCM()
-        " if pumvisible()
-            " return "\<C-p>"
-        " else
-            " return "\<c-k>"
-        " endif
-    " endfunction
-    " inoremap <c-j> <c-r>=g:JInYCM()<cr>
-    " au BufEnter,BufRead * exec "inoremap <silent> " . g:UltiSnipsJumpBackwordTrigger . " <C-R>=g:KInYCM()<cr>"
-    " let g:UltiSnipsJumpBackwordTrigger = "<c-k>"
-" " }}}
+    func! g:KInYCM()
+        if pumvisible()
+            return "\<C-p>"
+        else
+            return "\<c-k>"
+        endif
+    endfunction
+    inoremap <c-j> <c-r>=g:JInYCM()<cr>
+    au BufEnter,BufRead * exec "inoremap <silent> " . g:UltiSnipsJumpBackwordTrigger . " <C-R>=g:KInYCM()<cr>"
+    let g:UltiSnipsJumpBackwordTrigger = "<c-k>"
+" }}}
 
 " " delimitMate {{{
     " " for python docstring ",优化输入
