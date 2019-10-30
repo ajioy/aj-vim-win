@@ -188,7 +188,9 @@ endif
 " font type
 "set guifont=Consolas:h12.5:cANSI
 " set guifont=Consolas\ for\ Powerline\ FixedD:h12.5
-set guifont=Monaco\ for\ powerline:h11.5:cANSI
+" set guifont=Monaco\ for\ powerline:h11.5:cANSI
+set guifont=Monaco\ for\ powerline:h14:b:cANSI
+" set guifont=Menlo\ for\ powerline:h16:b:cANSI
 " set guifont=fixed:h11
 
 " hightlight the column
@@ -211,7 +213,7 @@ set guicursor+=a:blinkon0
 " endfunction
 
 winpos 0 0 "设置初始界面位置  
-set lines=50 columns=95 "设置初始界面大小
+set lines=45 columns=95 "设置初始界面大小
 
 " 恢复上次窗口位置和大小，缺点是会闪一下
 " if has("gui_running")
