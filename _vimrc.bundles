@@ -508,7 +508,7 @@ filetype plugin indent on
 
 " YouCompleteMe {{{
     " set runtimepath+=D:/Vim/vimfiles/plugged/YouCompleteMe " 加这句会让按需加载失效
-    let g:ycm_server_python_interpreter = 'E:/Python/Python27/python.exe'
+    let g:ycm_server_python_interpreter = 'D:/Python/Python27/python.exe'
     " let g:ycm_python_binary_path = 'python' "这种也行，但要保证环境变量中只有
     " 一个路径
     "youcompleteme  默认tab  s-tab 和自动补全冲突
@@ -738,6 +738,8 @@ filetype plugin indent on
     let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
     let g:Lf_WorkingDirectoryMode = 'ac'
     let g:Lf_WindowHeight = 0.30
+    let g:Lf_UseCache = 0 " 不用缓存
+    let g:Lf_UseMemoryCache = 0 " 每次启动都刷新缓存
     " let g:Lf_StlColorscheme = 'powerline'
     nmap <leader>lf :LeaderfFunction<CR>
     nmap <leader>lb :LeaderfBuffer<CR>

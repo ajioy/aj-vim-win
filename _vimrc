@@ -189,7 +189,7 @@ endif
 "set guifont=Consolas:h12.5:cANSI
 " set guifont=Consolas\ for\ Powerline\ FixedD:h12.5
 " set guifont=Monaco\ for\ powerline:h11.5:cANSI
-set guifont=Monaco\ for\ powerline:h14:b:cANSI
+set guifont=Monaco\ for\ powerline:h12.5:b:cANSI
 " set guifont=Menlo\ for\ powerline:h16:b:cANSI
 " set guifont=fixed:h11
 
