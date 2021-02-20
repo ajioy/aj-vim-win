@@ -1,14 +1,19 @@
 # a vim config for windows (gvim 8.1)
-> **last modified** : 2019-07-28
+> **last modified** : 2021-02-20
 
-> **author**: ajioy scotte
+> **author**: ajioy scotte(ajioy@hotmail.com)
+
+## screenshot
+![aj-vim-win-screenshoot](https://raw.githubusercontent.com/ajioy/storage/master/screenshot.png)
 
 ## dependencies:
+> * python
 > * ctags
 > * ag / rg
 > * youcompleteme
+> * nerdfonts
 
-## install
+## screenshootinstall
 ### normal
 ```
 打开powelshell
@@ -49,6 +54,13 @@ choco install ag
 [download](https://www.zhihu.com/question/25437050/answer/95662340) check it
 
 
+### nerdfonts
+```
+" 为了vim-devicons正常显示目录及文件图标，需要下载nerdfont
+" 也可以为你喜欢的字体添加图标，教程参考
+" https://github.com/ryanoasis/nerd-fonts#option-8-patch-your-own-font
+" https://zhuanlan.zhihu.com/p/150097941
+```
 ## explain something more
 ```
 todo
