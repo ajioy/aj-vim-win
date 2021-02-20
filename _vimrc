@@ -1,9 +1,9 @@
 "==========================================
 " Author:  Ajioy
-" Version: 1.0
+" Version: 1.1
 " Email: ajioy@hotmail.com
-" BlogPost: http://blog.csdn.net/ajioy
-" Last_modify: 2019-7-28
+" BlogPost: https://ajioy.cn
+" Last_modify: 2021-02-20
 "==========================================
 
 " +--------------------------------------------------------------------------+
@@ -160,21 +160,21 @@ set ttyfast
 " 00x增减数字时使用十进制
 set nrformats=
 
-" " 相对行号: 行号变成相对，可以用 nj/nk 进行跳转
-" set relativenumber number
-" au FocusLost * :set norelativenumber number
-" au FocusGained * :set relativenumber
-" " 插入模式下用绝对行号, 普通模式下用相对
-" autocmd InsertEnter * :set norelativenumber number
-" autocmd InsertLeave * :set relativenumber
-" function! NumberToggle()
-  " if(&relativenumber == 1)
-    " set norelativenumber number
-  " else
-    " set relativenumber
-  " endif
-" endfunc
-" nnoremap <C-n> :call NumberToggle()<cr>
+" 相对行号: 行号变成相对，可以用 nj/nk 进行跳转
+set relativenumber number
+au FocusLost * :set norelativenumber number
+au FocusGained * :set relativenumber
+" 插入模式下用绝对行号, 普通模式下用相对
+autocmd InsertEnter * :set norelativenumber number
+autocmd InsertLeave * :set relativenumber
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set norelativenumber number
+  else
+    set relativenumber
+  endif
+endfunc
+nnoremap <C-n> :call NumberToggle()<cr>
 
 " 防止tmux下vim的背景色显示异常
 " Refer: http://sunaku.github.io/vim-256color-bce.html
@@ -186,11 +186,16 @@ if &term =~ '256color'
 endif
 
 " font type
-"set guifont=Consolas:h12.5:cANSI
+" set guifont=Consolas:h12.5:cANSI
 " set guifont=Consolas\ for\ Powerline\ FixedD:h12.5
-" set guifont=Monaco\ for\ powerline:h11.5:cANSI
-set guifont=Monaco\ for\ powerline:h12.5:b:cANSI
-" set guifont=Menlo\ for\ powerline:h16:b:cANSI
+" set guifont=Monaco\ for\ Powerline:b:h12.5:cANSI
+" set guifont=Monaco\ for\ powerline:h12.5:b:cANSI
+" 为了vim-devicons正常显示目录及文件图标，需要下载nerdfont
+" 也可以为你喜欢的字体添加图标，教程参考
+" https://github.com/ryanoasis/nerd-fonts#option-8-patch-your-own-font
+" https://zhuanlan.zhihu.com/p/150097941
+set guifont=Menlo\ Nerd\ Font\ Mono:h14:cANSI 
+" set guifont=Menlo\ for\ Powerline:b:h12
 " set guifont=fixed:h11
 
 " hightlight the column
