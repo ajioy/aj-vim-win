@@ -194,7 +194,7 @@ endif
 " 也可以为你喜欢的字体添加图标，教程参考
 " https://github.com/ryanoasis/nerd-fonts#option-8-patch-your-own-font
 " https://zhuanlan.zhihu.com/p/150097941
-set guifont=Menlo\ Nerd\ Font\ Mono:h14:cANSI 
+set guifont=Menlo\ Nerd\ Font\ Mono:h14:cANSI
 " set guifont=Menlo\ for\ Powerline:b:h12
 " set guifont=fixed:h11
 
