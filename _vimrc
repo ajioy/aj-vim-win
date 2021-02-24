@@ -195,6 +195,12 @@ endif
 " https://github.com/ryanoasis/nerd-fonts#option-8-patch-your-own-font
 " https://zhuanlan.zhihu.com/p/150097941
 set guifont=Menlo\ Nerd\ Font\ Mono:h14:cANSI
+" set guifont=Menlo\ Nerd\ Font:h14:cANSI
+" set guifont=CodeNewRoman\ NF:h14
+" set guifont=Firacode\ Nerd\ Font:h14
+" set guifont=Anonymice\ NF
+" set guifont=Hurmit\ Nerd\ Font:h12
+" set guifont=Menlo\ NF:h14
 " set guifont=Menlo\ for\ Powerline:b:h12
 " set guifont=fixed:h11
 
