@@ -814,6 +814,16 @@ noremap <leader>ff :%!python3 -m json.tool<CR>
 
 " gvim8.2 ctrl+f 变成了查找
 noremap <c-f> <c-f>
+inoremap <c-f> <c-f>
+cnoremap <c-f> <c-f>
+
+noremap <c-h> <c-h>
+inoremap <c-h> <c-h>
+cnoremap <c-h> <c-h>
+
+" 插入当前文件的绝对路径
+noremap <leader>i :r! echo %:p<CR>
+
 
 " ======================= Plug begin===================================
 " install bundles

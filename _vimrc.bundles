@@ -1250,7 +1250,7 @@ filetype plugin indent on
     let g:indentLine_char = '¦'
     let g:indentLine_color_term = 239
     "映射到,i键 
-    map <leader>i :IndentLinesToggle<CR> 
+    " map <leader>i :IndentLinesToggle<CR> 
 "}}}
 
 
@@ -1259,7 +1259,7 @@ filetype plugin indent on
     nmap     <leader>rd :Fardo
     nmap     <leader>ro :Farundo
     au FileType far_vim map <buffer><silent>q :bw<cr>
-    "let g:far#sources = 'ag'
+    " let g:far#sources = 'rg'
 " }}}
 
 " " Tabular {{{
