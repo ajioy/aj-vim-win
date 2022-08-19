@@ -1,9 +1,9 @@
 "==========================================
 " Author:  Ajioy
-" Version: 1.1
+" Version: 1.2
 " Email: ajioy@hotmail.com
 " BlogPost: https://ajioy.cn
-" Last_modify: 2021-02-20
+" Last_modify: 2022-08-19
 "==========================================
 
 " +--------------------------------------------------------------------------+
@@ -82,7 +82,7 @@ set ruler
 set showcmd
 " 取消换行
 
-set nowrap
+" set nowrap
 " 括号配对情况, 跳转并高亮一下匹配的括号
 set showmatch
 " How many tenths of a second to blink when matching brackets
@@ -429,6 +429,8 @@ noremap L $
 " Map ; to : and save a million keystrokes 用于快速进入命令行
 nnoremap ; :
 
+
+
 " 命令行模式增强，ctrl - a到行首， -e 到行尾
 " cnoremap <C-j> <t_kd>
 " cnoremap <C-k> <t_ku>
@@ -589,6 +591,10 @@ nnoremap U <C-r>
 " nnoremap <leader>ev :vsp $MYVIMRC<CR>
 " nnoremap <leader>ez :vsp ~/.zshrc<CR>
 " nnoremap <leader>sv :source $MYVIMRC<CR>
+" 插入模式快速跳到行首行尾
+imap <C-a> <Esc><S-^>i
+imap <C-e> <Esc>$a
+
 
 
 "==========================================
@@ -734,7 +740,8 @@ highlight SpellLocal term=underline cterm=underline
 
 " 位置不能随便挪,会报错
 set list " show specail symbol
-set listchars=tab:>/,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
+" set listchars=tab:>/,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
+set listchars=tab:»·,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 
 
 
@@ -797,11 +804,21 @@ func! CompileRunGcc()
     endif
 endfunc
 " =============== code language end ===========================
+" 替换光标所在单词
+nnoremap <leader>r :%s/\<<C-R><C-W>\>//g<left><left>
+" 统计光标所在单词出现的次数
+nnoremap <leader>c :%s/\<<C-R><C-W>\>//gn<CR>
 
+" 格式化json文件，注：要手动更改json/tool.py，ensure_ascii设为False，json.dump(obj, outfile, sort_keys=sort_keys, indent=4, ensure_ascii=False)
+noremap <leader>ff :%!python3 -m json.tool<CR>
+
+" gvim8.2 ctrl+f 变成了查找
+noremap <c-f> <c-f>
 
 " ======================= Plug begin===================================
 " install bundles
 if filereadable(expand("$VIM/_vimrc.bundles"))
+    " 也可手动执行，重新加载配置文件，立即生效
   source $VIM/_vimrc.bundles
 endif
 

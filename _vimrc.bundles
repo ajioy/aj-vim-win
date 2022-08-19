@@ -20,18 +20,21 @@ endif
 " ----------------------------------------------------------------------------
 " - Avoid using standard Vim directory names like 'plugin'
 
-"call plug#begin('~/.vim/bundle') "linux
 call plug#begin('$VIM/vimfiles/plugged') "windows
     " 移动光标到插件名上, 使用'#'快速跳转到每个插件的配置处
+    Plug 'arnaud-lb/vim-php-namespace'
+    " 基于LSP的代码自动补全，函数跳转，错误检测
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " 倒序
     " nerdtree icons show different colors
-    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+    " Plug 'tweekmonster/startuptime.vim'
+    Plug 'tiagofumo/vim-nerdtree-syntax-highlight' ,{ 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
     " nerdtree icons
-    Plug 'ryanoasis/vim-devicons'
+    Plug 'ryanoasis/vim-devicons' ,{ 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
     Plug 'mg979/vim-visual-multi'
     Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
     " 光标下单词显示下划线
-    Plug 'itchyny/vim-cursorword'
+    " Plug 'itchyny/vim-cursorword'
     " Plug 'liuchengxu/space-vim-dark'
     " Plug 'whatyouhide/vim-gotham'
     Plug 'haya14busa/incsearch.vim'
@@ -41,26 +44,27 @@ call plug#begin('$VIM/vimfiles/plugged') "windows
     Plug 'ludovicchabant/vim-gutentags'
 
     " 异步运行代码输出结果
-    Plug 'skywind3000/asyncrun.vim'
+    Plug 'skywind3000/asyncrun.vim', { 'for':['python', 'ruby', 'c', 'cpp', 'html', 'javascript', 'css', 'php'] }
 
     " vim-scrits repos
     " Plug 'danro/rename.vim'
     " ========================
 
     " 语法检查
-    Plug 'w0rp/ale', { 'for':['python', 'ruby', 'html', 'javascript', 'css'] }
+    " Plug 'w0rp/ale', { 'for':['python', 'ruby', 'c', 'cpp', 'html', 'javascript', 'css', 'php'] }
 
     " Group dependencies, vim-snippets depends on ultisnips
     " 代码片段快速插入 (snippets中,是代码片段资源,需要学习)
     " Snippets are separated from the engine. Add this if you want them:
-    Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+    Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets', { 'for':['python', 'ruby', 'c', 'cpp', 'html', 'javascript', 'css', 'php'] }
 
     " auto complete
     " 代码自动补全
     " 迄今为止用到的最好的自动VIM自动补全插件
     " 重启 :YcmRestartServer
     " Plug 'Valloric/YouCompleteMe'     ", { 'on':  'YCM' } " 单独启动非常慢
-    Plug 'Valloric/YouCompleteMe', {'for':['python', 'html', 'javascript', 'css', 'c', 'cpp', 'cc']}
+    " Plug 'Valloric/YouCompleteMe', {'for':['python', 'c', 'cpp', 'cc']}
+
 
     " 自动补全单引号，双引号等
     " Plug 'Raimondi/delimitMate'
@@ -74,7 +78,7 @@ call plug#begin('$VIM/vimfiles/plugged') "windows
     Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
     " trailingwhitespace
     " 快速去行尾空格 [, + <Space>]
-    Plug 'bronson/vim-trailing-whitespace'
+    Plug 'bronson/vim-trailing-whitespace', { 'for':['python', 'ruby', 'c', 'cpp', 'html', 'javascript', 'css'] }
     " 快速赋值语句对齐
     Plug 'junegunn/vim-easy-align'
 
@@ -82,8 +86,6 @@ call plug#begin('$VIM/vimfiles/plugged') "windows
     " easymotion
     "更高效的移动 [,, + w/fx/h/j/k/l]
     Plug 'easymotion/vim-easymotion'
-    " Plug 'Lokaltog/vim-easymotion'
-
     " 更高效的行内移动, f/F/t/T, 才触发
     " quickscope
     " Plug 'unblevable/quick-scope'
@@ -128,7 +130,8 @@ call plug#begin('$VIM/vimfiles/plugged') "windows
     " fugitive
     Plug 'tpope/vim-fugitive'
     " gitgutter
-    Plug 'airblade/vim-gitgutter' " 这个关闭后会导致ale状态条变白，最好保留先
+    "  这个关闭后会导致ale状态条变白，最好保留先
+    Plug 'airblade/vim-gitgutter'
 
     " " gundo
     " " edit history, 可以查看回到某个历史状态
@@ -148,23 +151,26 @@ call plug#begin('$VIM/vimfiles/plugged') "windows
     " 主题 solarized
     " solarized
     Plug 'altercation/vim-colors-solarized'
+    " catppuccin
+    Plug 'catppuccin/vim', { 'as': 'catppuccin' }
     " molokai
     " 主题 molokai
     " Plug 'tomasr/molokai'
     " Plug 'rakr/vim-one'
-    " Plug 'dracula/vim', { 'as': 'dracula' }
+    Plug 'dracula/vim', { 'as': 'dracula' }
+    Plug 'tomasiser/vim-code-dark',
     " Plug 'joshdick/onedark.vim'
 
     " nerdtree nerdtreetabs
-    Plug 'scrooloose/nerdtree' , { 'on':  'NERDTreeToggle' }
+    Plug 'scrooloose/nerdtree' , { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
     " nerdtree显示git状态
     Plug 'Xuyuanp/nerdtree-git-plugin' , { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
     " Plug 'scrooloose/nerdtree' | Plug 'jistr/vim-nerdtree-tabs'
 
     " tagbar
-    Plug 'majutsushi/tagbar', { 'for':['python', 'ruby', 'html', 'javascript', 'css'] }
+    Plug 'majutsushi/tagbar', { 'for':['python', 'ruby', 'c', 'cpp', 'html', 'javascript', 'css', 'php'] }
     " ctrlspace
-    Plug 'vim-ctrlspace/vim-ctrlspace'", { 'on': 'NERDTreeToggle'}"
+    " Plug 'vim-ctrlspace/vim-ctrlspace'", { 'on': 'NERDTreeToggle'}"
 
     " On-demand loading
     " 模糊查找
@@ -174,7 +180,7 @@ call plug#begin('$VIM/vimfiles/plugged') "windows
     " 显示最近打开过的文件MRU
     Plug 'mhinz/vim-startify'
     " 缩进竖线, 会影响json和md特殊符号的显示
-    Plug 'Yggdroot/indentLine', { 'for':['python', 'ruby', 'html', 'javascript', 'css'] }
+    Plug 'Yggdroot/indentLine', { 'for':['python', 'ruby', 'c', 'cpp', 'html', 'javascript', 'css', 'php'] }
     " 全局查找替换
     Plug 'brooth/far.vim'
     " 排版格式
@@ -332,7 +338,7 @@ call plug#begin('$VIM/vimfiles/plugged') "windows
 
         if count(g:bundle_groups, 'coffeescript')
             "
-            Plug 'kchmck/vim-coffee-script'
+            " Plug 'kchmck/vim-coffee-script'
         endif
 
 
@@ -344,7 +350,7 @@ call plug#begin('$VIM/vimfiles/plugged') "windows
         if count(g:bundle_groups, 'css')
             " css
             " not work in iterm2 which termianl selection is not xterm-256, and it slow
-            Plug 'ap/vim-css-color'
+            Plug 'ap/vim-css-color', { 'for': ['html', 'css', 'javscript'] }
             " 这个有坑, see issue https://github.com/wklken/k-vim/issues/49
             " Plug 'gorodinskiy/vim-coloresque'
             " Plug 'lilydjwg/colorizer'
@@ -352,7 +358,7 @@ call plug#begin('$VIM/vimfiles/plugged') "windows
 
         if count(g:bundle_groups, 'less')
             " ###### vim.less : less 自动更新##########
-            Plug 'groenewege/vim-less'
+            " Plug 'groenewege/vim-less'
             " autocmd BufWritePost *.less :!lessc % > %:p:r.css
         endif
 
@@ -407,7 +413,7 @@ filetype plugin indent on
     nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
     " nnoremap <silent> <leader>r :w<cr>:AsyncRun -raw python %<cr>
     " 用python3多一些
-    noremap <silent> <leader>r :w<cr>:AsyncRun -raw python3 %<cr>
+    " noremap <silent> <leader>r :w<cr>:AsyncRun -raw python3 %<cr>
     " nnoremap <silent> <leader>a :AsyncRun 
     " nnoremap <silent> <leader>c :AsyncRun! 
     nnoremap <leader>a :AsyncRun 
@@ -459,8 +465,7 @@ filetype plugin indent on
      \   'c': ['clang'],
      \}
      " E501 -> 120 chars
-     let g:ale_python_flake8_args="--ignore=E114,E116,E131 --max-line-length=120"
-     " --ignore=E225,E124,E712,E116
+     let g:ale_python_flake8_args="--ignore=E114,E116,E131 --max-line-length=120" " --ignore=E225,E124,E712,E116
      let g:ale_python_flake8_excutable="python3"
 
      let g:ale_sign_error = 'x'
@@ -500,6 +505,121 @@ filetype plugin indent on
   " }}}
 
 " ################### 自动补全 ###################
+" 新时代的LSP自动补全，支持补全、跳转、语法检查等
+" {{{ coc.nvim
+    let g:coc_disable_startup_warning = 1
+    " " " Use <TAB> to select the popup menu:
+    " inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+    " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Tab>"
+    " " inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+
+    " " gd to go to definition
+    " nmap <silent> <C-]> <Plug>(coc-definition)
+    " " gr to go to reference
+    " nmap <silent> <leader>jr <Plug>(coc-references)
+
+    " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+    " delays and poor user experience.
+    " set updatetime=300
+
+    " Always show the signcolumn, otherwise it would shift the text each time
+    " diagnostics appear/become resolved.
+    set signcolumn=yes
+
+    " Use tab for trigger completion with characters ahead and navigate.
+    " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+    " other plugin before putting this into your config.
+    inoremap <silent><expr> <TAB>
+        \ coc#pum#visible() ? coc#pum#next(1):
+        \ CheckBackspace() ? "\<Tab>" :
+        \ coc#refresh()
+    inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+    " Make <CR> to accept selected completion item or notify coc.nvim to format
+    " <C-g>u breaks current undo, please make your own choice.
+    inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                                \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+    function! CheckBackspace() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
+
+    inoremap <silent><expr> <c-@> coc#refresh()
+    " Use `[g` and `]g` to navigate diagnostics
+    " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+    nmap <silent> [g <Plug>(coc-diagnostic-prev)
+    nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+    " GoTo code navigation.
+    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gy <Plug>(coc-type-definition)
+    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gr <Plug>(coc-references)
+
+    " Use K to show documentation in preview window.
+    nnoremap <silent> K :call ShowDocumentation()<CR>
+
+    function! ShowDocumentation()
+    if CocAction('hasProvider', 'hover')
+        call CocActionAsync('doHover')
+    else
+        call feedkeys('K', 'in')
+    endif
+    endfunction
+
+    " Highlight the symbol and its references when holding the cursor.
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+
+    " Formatting selected code.
+    xmap <leader>f  <Plug>(coc-format-selected)
+    nmap <leader>f  <Plug>(coc-format-selected)
+
+    augroup mygroup
+    autocmd!
+    " Setup formatexpr specified filetype(s).
+    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    " Update signature help on jump placeholder.
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    augroup end
+
+    " Add (Neo)Vim's native statusline support.
+    " NOTE: Please see `:h coc-status` for integrations with external plugins that
+    " provide custom statusline: lightline.vim, vim-airline.
+    set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+    " Mappings for CoCList
+    " Show all diagnostics.
+    nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+    " Manage extensions.
+    nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+    " Show commands.
+    nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+    " Find symbol of current document.
+    nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+    " Search workspace symbols.
+    nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+    " Do default action for next item.
+    nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+    " Do default action for previous item.
+    nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+    " Resume latest coc list.
+    nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+    " coc-translator
+    " popup
+    nmap <silent><nowait> <space>tp  <Plug>(coc-translator-p)
+    vmap <silent><nowait> <space>tp  <Plug>(coc-translator-pv)
+    " echo
+    nmap <silent><nowait> <space>te  <Plug>(coc-translator-e)
+    vmap <silent><nowait> <space>te  <Plug>(coc-translator-ev)
+    " replace
+    nmap <silent><nowait> <space>tr  <Plug>(coc-translator-r)
+    vmap <silent><nowait> <space>tr  <Plug>(coc-translator-rv)
+    " coc-settings.json REF: https://github.com/theniceboy/nvim/blob/master/coc-settings.json
+
+"}}}
+
 "  非YCM系列补全插件
     " if has('nvim')
       " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -512,53 +632,53 @@ filetype plugin indent on
     " let g:python_host_prog = "E:/Python/Python27"
     " let g:python3_host_prog = "E:/Python/Python35"
 
-" YouCompleteMe {{{
-    " set runtimepath+=D:/Vim/vimfiles/plugged/YouCompleteMe " 加这句会让按需加载失效
-    let g:ycm_server_python_interpreter = 'D:/Python/Python27/python.exe'
-    " let g:ycm_python_binary_path = 'python' "这种也行，但要保证环境变量中只有
-    " 一个路径
-    "youcompleteme  默认tab  s-tab 和自动补全冲突
-    let g:ycm_key_list_select_completion=['<c-n>']
-    let g:ycm_key_list_previous_completion=['<c-p>']
-    " let g:ycm_key_list_select_completion = ['<Down>']
-    " let g:ycm_key_list_previous_completion = ['<Up>']
-    let g:ycm_confirm_extra_conf=0
-    let g:ycm_complete_in_comments = 1  "在注释输入中也能补全
-    let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
-    let g:ycm_use_ultisnips_completer = 1 "提示UltiSnips
-    let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
-    let g:ycm_collect_identifiers_from_tags_files = 1
-    " 开启语法关键字补全
-    let g:ycm_seed_identifiers_with_syntax=1
-    " 回车作为选中
-    let g:ycm_key_list_stop_completion = ['<CR>']
+" " YouCompleteMe {{{
+    " " set runtimepath+=D:/Vim/vimfiles/plugged/YouCompleteMe " 加这句会让按需加载失效
+    " let g:ycm_server_python_interpreter = 'D:/Python/Python27/python.exe'
+    " " let g:ycm_python_binary_path = 'python' "这种也行，但要保证环境变量中只有
+    " " 一个路径
+    " "youcompleteme  默认tab  s-tab 和自动补全冲突
+    " let g:ycm_key_list_select_completion=['<c-n>']
+    " let g:ycm_key_list_previous_completion=['<c-p>']
+    " " let g:ycm_key_list_select_completion = ['<Down>']
+    " " let g:ycm_key_list_previous_completion = ['<Up>']
+    " let g:ycm_confirm_extra_conf=0
+    " let g:ycm_complete_in_comments = 1  "在注释输入中也能补全
+    " let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
+    " let g:ycm_use_ultisnips_completer = 1 "提示UltiSnips
+    " let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
+    " let g:ycm_collect_identifiers_from_tags_files = 1
+    " " 开启语法关键字补全
+    " let g:ycm_seed_identifiers_with_syntax=1
+    " " 回车作为选中
+    " let g:ycm_key_list_stop_completion = ['<CR>']
 
-    "let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
-    let g:ycm_extra_spacing = 0
+    " "let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
+    " let g:ycm_extra_spacing = 0
 
-    " 跳转到定义处, 分屏打开
-    let g:ycm_goto_buffer_command = 'horizontal-split'
-    let g:ycm_register_as_syntastic_checker = 0
-    " nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
-    nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-    nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
+    " " 跳转到定义处, 分屏打开
+    " let g:ycm_goto_buffer_command = 'horizontal-split'
+    " let g:ycm_register_as_syntastic_checker = 0
+    " " nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
+    " nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+    " nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
 
-    " 引入，可以补全系统，以及python的第三方包 
-    if !empty(glob("$VIM/vimfiles/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"))
-        let g:ycm_global_ycm_extra_conf = "$VIM/vimfiles/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
-    endif
+    " " 引入，可以补全系统，以及python的第三方包 
+    " if !empty(glob("$VIM/vimfiles/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"))
+        " let g:ycm_global_ycm_extra_conf = "$VIM/vimfiles/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+    " endif
 
-    " set completeopt=menu,menuone
+    " " set completeopt=menu,menuone
 
-    " 直接触发自动补全 insert模式下
-    " let g:ycm_key_invoke_completion = '<C-Space>'
-    " 黑名单,不启用
-    let g:ycm_filetype_blacklist = {
-        \ 'tagbar' : 1,
-        \ 'gitcommit' : 1,
-        \}
+    " " 直接触发自动补全 insert模式下
+    " " let g:ycm_key_invoke_completion = '<C-Space>'
+    " " 黑名单,不启用
+    " let g:ycm_filetype_blacklist = {
+        " \ 'tagbar' : 1,
+        " \ 'gitcommit' : 1,
+        " \}
 
-    " }}}
+    " " }}}
 
 " ultisnips {{{
     let g:UltiSnipsExpandTrigger       = "<tab>"
@@ -781,12 +901,12 @@ filetype plugin indent on
     nnoremap <leader>o :CtrlSFOpen<CR>
     nnoremap <leader>to :CtrlSFToggle<CR>
     inoremap <leader>tt <Esc>:CtrlSFToggle<CR>
-    " let g:ctrlsf_extra_root_markers = ['.root']
+    let g:ctrlsf_extra_root_markers = ['.root', '.svn']
     let g:ctrlsf_default_root = 'project' " search in whole project, not current path
     let g:ctrlsf_regex_pattern = 1
     let g:ctrlsf_search_mode = 'async'
     let g:ctrlsf_position = 'right'
-    " let g:ctrlsf_ackprg = 'C:/ProgramData/Chocolatey/bin/rg.exe'
+    let g:ctrlsf_ackprg = 'C:/ProgramData/Chocolatey/bin/rg.exe'
 
     " let g:ctrlsf_default_root = project+fw
     let g:ctrlsf_ignore_dir = ['.tags', '.git', '.svn', 'dist', 'dll', 'node_moduels']
@@ -947,6 +1067,11 @@ filetype plugin indent on
     " color dracula
 " }}}
 
+" vscode dark {{{
+    colorscheme codedark
+    let g:airline_theme = 'codedark'
+" }}}
+
 " " onedrak {{{
     " let g:airline_theme='onedark'
     " let g:onedark_termcolors=256
@@ -957,6 +1082,7 @@ filetype plugin indent on
     " let g:onedark_terminal_italics = 1
     " colorscheme onedark
 " " }}}
+
 " gotham {{{
     " colorscheme gotham256
 " }}}
@@ -1078,21 +1204,21 @@ filetype plugin indent on
     let g:NERDTreeExtensionHighlightColor['c++'] = s:green " sets the color of c++ files to blue
 " }}}
 
-" Vim Workspace Controller
-" ctrlspace {{{
-    " nnoremap <silent><C-p> :CtrlSpace O<CR>
-    let g:CtrlSpaceDefaultMappingKey = "<C-P> "
-    let g:airline_exclude_preview = 1
-    hi CtrlSpaceSelected guifg=#586e75 guibg=#eee8d5 guisp=#839496 gui=reverse,bold ctermfg=10 ctermbg=7 cterm=reverse,bold
-    hi CtrlSpaceNormal   guifg=#839496 guibg=#021B25 guisp=#839496 gui=NONE ctermfg=12 ctermbg=0 cterm=NONE
-    hi CtrlSpaceSearch   guifg=#cb4b16 guibg=NONE gui=bold ctermfg=9 ctermbg=NONE term=bold cterm=bold
-    hi CtrlSpaceStatus   guifg=#839496 guibg=#002b36 gui=reverse term=reverse cterm=reverse ctermfg=12 ctermbg=8
+" " Vim Workspace Controller
+" " ctrlspace {{{
+    " " nnoremap <silent><C-p> :CtrlSpace O<CR>
+    " let g:CtrlSpaceDefaultMappingKey = "<C-P> "
+    " let g:airline_exclude_preview = 1
+    " hi CtrlSpaceSelected guifg=#586e75 guibg=#eee8d5 guisp=#839496 gui=reverse,bold ctermfg=10 ctermbg=7 cterm=reverse,bold
+    " hi CtrlSpaceNormal   guifg=#839496 guibg=#021B25 guisp=#839496 gui=NONE ctermfg=12 ctermbg=0 cterm=NONE
+    " hi CtrlSpaceSearch   guifg=#cb4b16 guibg=NONE gui=bold ctermfg=9 ctermbg=NONE term=bold cterm=bold
+    " hi CtrlSpaceStatus   guifg=#839496 guibg=#002b36 gui=reverse term=reverse cterm=reverse ctermfg=12 ctermbg=8
 
-    " 保存工程状态
-    let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
-    let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
-    let g:CtrlSpaceSaveWorkspaceOnExit = 1
-" }}}
+    " " 保存工程状态
+    " let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
+    " let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
+    " let g:CtrlSpaceSaveWorkspaceOnExit = 1
+" " }}}
 
 " 标签导航
 " tagbar {{{
@@ -1215,4 +1341,16 @@ filetype plugin indent on
 
 " css {{{
 " }}}
+"
+" php {{{
+
+    " php自动引入namepsace，依赖ctags
+    " {{{
+    function! IPhpInsertUse()
+        call PhpInsertUse()
+        call feedkeys('a',  'n')
+    endfunction
+    autocmd FileType php inoremap <Leader>u <Esc>:call IPhpInsertUse()<CR>
+    autocmd FileType php noremap <Leader>u :call PhpInsertUse()<CR>
+    " }}}
 "------------------------------------------- end of configs --------------------------------------------
