@@ -143,8 +143,8 @@ call plug#begin('$VIM/vimfiles/plugged') "windows
     " view
     " airline
     " 状态栏增强展示
-    Plug 'vim-airline/vim-airline' ", { 'for':['python', 'ruby', 'c', 'cpp', 'html', 'javascript', 'css'] }
-    Plug 'vim-airline/vim-airline-themes' ", { 'for':['python', 'ruby', 'c', 'cpp', 'html', 'javascript', 'css'] }
+    Plug 'vim-airline/vim-airline' ", { 'for':['python', 'ruby', 'c', 'cpp', 'html', 'javascript', 'css', 'php'] }
+    Plug 'vim-airline/vim-airline-themes' ", { 'for':['python', 'ruby', 'c', 'cpp', 'html', 'javascript', 'css', 'php'] }
     " rainbow_parentheses
     " 括号显示增强，"影响vim-devicons图标显示，会出现中括号
     " Plug 'kien/rainbow_parentheses.vim'
@@ -572,16 +572,16 @@ filetype plugin indent on
     autocmd CursorHold * silent call CocActionAsync('highlight')
 
     " Formatting selected code.
-    xmap <leader>f  <Plug>(coc-format-selected)
-    nmap <leader>f  <Plug>(coc-format-selected)
+    xmap <leader>fs  <Plug>(coc-format-selected)
+    nmap <leader>fs  <Plug>(coc-format-selected)
 
-    augroup mygroup
-    autocmd!
-    " Setup formatexpr specified filetype(s).
-    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-    " Update signature help on jump placeholder.
-    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-    augroup end
+    " augroup mygroup
+    " autocmd!
+    " " Setup formatexpr specified filetype(s).
+    " autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    " " Update signature help on jump placeholder.
+    " autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    " augroup end
 
     " Add (Neo)Vim's native statusline support.
     " NOTE: Please see `:h coc-status` for integrations with external plugins that

@@ -416,6 +416,15 @@ nnoremap <F3> :set wrap! wrap?<CR>
 " " disbale paste mode when leaving insert mode
 " au InsertLeave * set nopaste
 
+" gvim8.2 ctrl+f 变成了查找
+noremap <c-f> <c-f>
+inoremap <c-f> <c-f>
+cnoremap <c-f> <c-f>
+
+noremap <c-h> <c-h>
+inoremap <c-h> <c-h>
+cnoremap <c-h> <c-h>
+
 " 分屏窗口移动, Smart way to move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -812,14 +821,6 @@ nnoremap <leader>c :%s/\<<C-R><C-W>\>//gn<CR>
 " 格式化json文件，注：要手动更改json/tool.py，ensure_ascii设为False，json.dump(obj, outfile, sort_keys=sort_keys, indent=4, ensure_ascii=False)
 noremap <leader>ff :%!python3 -m json.tool<CR>
 
-" gvim8.2 ctrl+f 变成了查找
-noremap <c-f> <c-f>
-inoremap <c-f> <c-f>
-cnoremap <c-f> <c-f>
-
-noremap <c-h> <c-h>
-inoremap <c-h> <c-h>
-cnoremap <c-h> <c-h>
 
 " 插入当前文件的绝对路径
 noremap <leader>i :r! echo %:p<CR>
