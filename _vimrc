@@ -293,7 +293,7 @@ set encoding=utf-8
 " 自动判断编码时，依次尝试以下编码：
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1,gbk
 "set fileencodings=utf-8,gbk
-set helplang=cn
+set helplang=en
 "set langmenu=zh_CN.UTF-8
 "set enc=2byte-gb18030
 " 下面这句只影响普通模式 (非图形界面) 下的 Vim
@@ -308,9 +308,12 @@ set formatoptions+=m
 set formatoptions+=B
 
 " menu messy cod
-set imcmdline
-set langmenu=zh_CN 
-let $LANG = 'zh_CN.UTF-8' 
+set langmenu=en_US.UTF-8
+language en
+language message en_US.UTF-8
+" set langmenu=zh_CN 
+" let $LANG = 'zh_CN.UTF-8' 
+" language message zh_CN.UTF-8
 source $VIMRUNTIME/delmenu.vim 
 source $VIMRUNTIME/menu.vim 
 source $VIMRUNTIME/vimrc_example.vim 
@@ -320,7 +323,6 @@ behave mswin
 " 去掉全选快捷键，恢复成递增
 " noremap <C-A> <C-A> 
 
-language message zh_CN.UTF-8
 "==========================================
 " others 其它设置
 "==========================================
@@ -419,11 +421,9 @@ nnoremap <F3> :set wrap! wrap?<CR>
 " gvim8.2 ctrl+f 变成了查找
 noremap <c-f> <c-f>
 inoremap <c-f> <c-f>
-cnoremap <c-f> <c-f>
 
 noremap <c-h> <c-h>
 inoremap <c-h> <c-h>
-cnoremap <c-h> <c-h>
 
 " 分屏窗口移动, Smart way to move between windows
 map <C-j> <C-W>j
@@ -441,10 +441,12 @@ nnoremap ; :
 
 
 " 命令行模式增强，ctrl - a到行首， -e 到行尾
-" cnoremap <C-j> <t_kd>
-" cnoremap <C-k> <t_ku>
-" cnoremap <C-a> <Home>
-" cnoremap <C-e> <End>
+cnoremap <C-j> <t_kd>
+cnoremap <C-k> <t_ku>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <c-f> <left>
+cnoremap <c-b> <right>
 
 " 搜索相关
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
