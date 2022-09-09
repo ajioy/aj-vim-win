@@ -148,16 +148,19 @@ call plug#begin('$VIM/vimfiles/plugged') "windows
     " rainbow_parentheses
     " 括号显示增强，"影响vim-devicons图标显示，会出现中括号
     " Plug 'kien/rainbow_parentheses.vim'
+    " Plug 'luochen1990/rainbow'
+
     " 主题 solarized
     " solarized
-    Plug 'altercation/vim-colors-solarized'
+    " Plug 'altercation/vim-colors-solarized'
     " catppuccin
-    Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+    " Plug 'catppuccin/vim', { 'as': 'catppuccin' }
     " molokai
     " 主题 molokai
     " Plug 'tomasr/molokai'
     " Plug 'rakr/vim-one'
-    Plug 'dracula/vim', { 'as': 'dracula' }
+    " Plug 'dracula/vim', { 'as': 'dracula' }
+    " vscode默认配色
     Plug 'tomasiser/vim-code-dark',
     " Plug 'joshdick/onedark.vim'
 
@@ -554,7 +557,7 @@ filetype plugin indent on
     " GoTo code navigation.
     nmap <silent> gd <Plug>(coc-definition)
     nmap <silent> gy <Plug>(coc-type-definition)
-    nmap <silent> gi <Plug>(coc-implementation)
+    " nmap <silent> gi <Plug>(coc-implementation)
     nmap <silent> gr <Plug>(coc-references)
 
     " Use K to show documentation in preview window.
@@ -616,7 +619,19 @@ filetype plugin indent on
     " replace
     nmap <silent><nowait> <space>tr  <Plug>(coc-translator-r)
     vmap <silent><nowait> <space>tr  <Plug>(coc-translator-rv)
-    " coc-settings.json REF: https://github.com/theniceboy/nvim/blob/master/coc-settings.json
+    " :CocConfig  coc-settings.json REF: https://github.com/theniceboy/nvim/blob/master/coc-settings.json
+
+    " ex. :CocInstall coc-json
+    " :CocList extensions   check all installed sub-plugins
+    " coc-clangd  need clangd
+    " coc-pyright  need pip3 install python-language-server[all] (for python3, if python2, install coc-python), and :CocConfig add "python.jediEnabled": false
+    " coc-phpls
+    " coc-json
+    " coc-tsserver for js,ts
+    " coc-html
+    " coc-css
+    " coc-snippets
+    " coc-translator
 
 "}}}
 
@@ -732,6 +747,8 @@ filetype plugin indent on
     let g:NERDAltDelims_python = 1
     " ---nerdcommenter add a space when comment
     let g:NERDSpaceDelims=1
+    nnoremap <silent> <leader>cv V}:call NERDComment('0', 'toggle')<CR>
+    inoremap <silent> <leader>cv V{:call NERDComment('0', 'toggle')<CR>
 " }}}
 
 " " trailingwhitespace {{{
@@ -1032,19 +1049,49 @@ filetype plugin indent on
     " au Syntax * RainbowParenthesesLoadBraces
 " " }}}
 
+" " rainbow {{{
+    " let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
+    " let g:rainbow_conf = {
+    " \    'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+    " \    'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+    " \    'operators': '_,_',
+    " \    'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+    " \    'separately': {
+    " \        '*': {},
+    " \        'tex': {
+    " \            'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+    " \        },
+    " \        'php': {
+    " \            'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+    " \        },
+    " \        'lisp': {
+    " \            'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+    " \        },
+    " \        'vim': {
+    " \            'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+    " \        },
+    " \        'html': {
+    " \            'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+    " \        },
+    " \        'css': 0,
+    " \    }
+    " \}
+" "
+" " }}}
+
 " ################### 显示增强-主题 ###################"
 
-" solarized {{{
-    set background=dark
-    colorscheme solarized
-    let g:solarized_termcolors=256
-    let g:solarized_termtrans=1
-    let g:solarized_contrast="high"
-    let g:solarized_visibility="high"
-    "other highlighting
-    " fix colorscheme solarized display error
-    highlight clear SignColumn
-" }}}
+" " solarized {{{
+    " set background=dark
+    " colorscheme solarized
+    " let g:solarized_termcolors=256
+    " let g:solarized_termtrans=1
+    " let g:solarized_contrast="high"
+    " let g:solarized_visibility="high"
+    " "other highlighting
+    " " fix colorscheme solarized display error
+    " highlight clear SignColumn
+" " }}}
 
 " " molokai {{{
     " " monokai原始背景色
